@@ -1,5 +1,5 @@
 import React from "react";
-import BookCard from "./BookCard"; // Assurez-vous d'importer BookCard.
+import BookCard from "./BookCard";
 
 const BookList = ({
   books,
@@ -16,6 +16,8 @@ const BookList = ({
           book={book}
           onFavorited={toggleFavorite}
           onWishlisted={toggleWishlist}
+          isFavorite={favorites.some((favorite) => favorite.id === book.id)}
+          isWishlist={wishlist.includes(book.id)}
         />
       ))}
     </div>

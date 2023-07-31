@@ -1,4 +1,3 @@
-// src/components/Book.jsx
 import React from "react";
 
 const Book = ({
@@ -10,9 +9,9 @@ const Book = ({
 }) => {
   return (
     <div className='book'>
-      <img src={book.cover} alt={book.title} />
+      <img src={book.thumbnailUrl} alt={book.title} />
       <h2>{book.title}</h2>
-      <p>{book.description}</p>
+      <p>{book.shortDescription}</p>
       <button onClick={() => toggleFavorite(book)}>
         {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
       </button>
