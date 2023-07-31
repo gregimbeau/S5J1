@@ -1,0 +1,13 @@
+.favorites-wishlist-info {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: black;
+  color: rgb(32, 201, 32);
+  padding: 1px 5px;
+  border: 2px solid green;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 9999; // Pour s'assurer que le texte reste au-dessus du contenu pendant le défilement
+}

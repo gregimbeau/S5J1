@@ -3,6 +3,7 @@ import SearchBar from "./components/SearchBar";
 import FilterButtons from "./components/FilterButtons";
 import BookList from "./components/BookList";
 import booksData from "../public/books.json";
+import FavoritesAndWishlistInfo from "./components/FavoritesAndWishlistInfo"; // Ajoute cette ligne
 
 const App = () => {
   const [books, setBooks] = useState([]);
@@ -156,6 +157,7 @@ const App = () => {
 
   return (
     <div>
+      <FavoritesAndWishlistInfo />
       <h1>Reading Tracker</h1>
       <div className='search-container'>
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
