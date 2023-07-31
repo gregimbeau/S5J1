@@ -1,4 +1,4 @@
-@import "button";
+// @import "button";
 @import "colors";
 
 .book-card {
@@ -15,6 +15,7 @@
   img {
     width: 100%;
     object-fit: cover;
+    object-position: center;
   }
 
   h2 {
@@ -30,18 +31,30 @@
     padding: 0 1rem 1rem;
     line-height: 1.5;
   }
-  .added-favorite {
-    background-color: $green;
-    color: white;
-  }
 
-  .added-wishlist {
-    background-color: $green;
-    color: white;
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0.5rem; // Add margin to separate buttons from the content above
   }
 
   button {
     @extend %button-style;
+    font-size: 0.9rem !important;
+    height: 60px; // Decrease the height
+    width: 150px; // Set a fixed width for the buttons
+
+    &:hover {
+      background-color: #2b6cb0;
+    }
   }
 
+  .added-favorite {
+    background-color: $green;
+  }
+
+  .added-wishlist {
+    background-color: $green;
+  }
 }

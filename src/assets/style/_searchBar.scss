@@ -1,0 +1,25 @@
+@import "variables";
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  width: 100%; // Changed from 90% to 100% to take full width of the container
+
+  input[type='text'] {
+    width: 100%; // Change to 100% to take full width of the search bar
+    padding: 0.5rem;
+    border: 2px solid $light-grey;
+    border-radius: $border-radius;
+
+    &:focus {
+      outline: none;
+      border-color: $dark-grey;
+      box-shadow: $box-shadow;
+    }
+
+    &::placeholder {
+      color: $dark-grey;
+    }
+  }
+}

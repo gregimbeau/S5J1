@@ -1,16 +1,68 @@
 // _button.scss
 %button-style {
-    color: #fff;
-    background-color: #3182ce;
-    border-radius: 0.25rem;
-    margin: 0.5rem;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    line-height: 1.5;
+  color: #fff;
+  background-color: #3182ce;
+  border-radius: 0.25rem;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #2b6cb0;
+  }
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center; // Changed to center
+  gap: 1rem; // Adjust this for space between buttons
+
+  button {
+    @extend %button-style;
+
+    background-color: #4caf50;
+    width: 225px;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
     cursor: pointer;
-    transition: all 0.2s;
-  
+
     &:hover {
-      background-color: #2b6cb0;
+      background-color: #008cba;
     }
+  }
+}
+
+.clear-buttons {
+  display: flex;
+  justify-content: center; // Changed to center
+  align-items: center; 
+  gap: 1rem; // Adjust this for space between buttons
+
+  button {
+    @extend %button-style;
+
+    background-color: #ccc;
+    width: 225px;
+    height: 30px;
+    border: none;
+    color: #000;
+    
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    line-height: 15px; // Add this to center the text vertically
+
+    &:hover {
+      background-color: darkgrey;
+    }
+  }
 }

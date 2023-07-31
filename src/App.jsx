@@ -157,10 +157,18 @@ const App = () => {
   return (
     <div>
       <h1>Reading Tracker</h1>
-      <button onClick={clearFavorites}>Clear Favorites</button>
-      <button onClick={clearWishlist}>Clear Wishlist</button>
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <FilterButtons filter={filter} setFilter={setFilter} />
+      <div className='search-container'>
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <div className='button-group'>
+          <FilterButtons filter={filter} setFilter={setFilter} />
+          <div className='clear-buttons'>
+            <button onClick={clearFavorites}>Clear Favorites</button>
+            <button onClick={clearWishlist}>Clear Wishlist</button>
+          </div>
+        </div>
+      </div>
+      <br></br>
+      <br></br>
       <BookList
         books={filteredBooks}
         toggleFavorite={toggleFavorite}

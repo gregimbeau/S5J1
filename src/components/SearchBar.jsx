@@ -6,7 +6,7 @@ const SearchBar = ({ searchTerm, setSearchTerm }) => {
   };
 
   return (
-    <div>
+    <div className='search-bar'>
       <input
         type='text'
         placeholder='Rechercher livre par titre'
