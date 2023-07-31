@@ -12,16 +12,20 @@ const BookList = ({
     <div className='book-list'>
       {books.map((book) => (
         <BookCard
-          key={book.id}
+          key={book.title}
           book={book}
           onFavorited={toggleFavorite}
           onWishlisted={toggleWishlist}
-          isFavorite={favorites.some((favorite) => favorite.id === book.id)}
-          isWishlist={wishlist.includes(book.id)}
+          isFavorite={favorites.some(
+            (favorite) => favorite.title === book.title
+          )}
+          isWishlist={wishlist.includes(book.title)}
         />
       ))}
     </div>
   );
 };
+
+
 
 export default BookList;

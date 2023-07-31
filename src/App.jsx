@@ -12,45 +12,42 @@ const App = () => {
   const [filter, setFilter] = useState("");
   const [filteredBooks, setFilteredBooks] = useState([]);
 
-  // Inside the filterBooks function in App.jsx
-  const filterBooks = () => {
-    let newFilteredBooks = [...books];
+const filterBooks = () => {
+  let newFilteredBooks = Object.values(books);
 
-    if (filter === "favorites") {
-      newFilteredBooks = newFilteredBooks.filter((book) =>
-        favorites.some((favorite) => favorite.id === book.id)
-      );
-      console.log("Filtered by favorites: ", newFilteredBooks); // Add this line
-    }
+  if (filter === "favorites") {
+    newFilteredBooks = newFilteredBooks.filter((book) => book.favorite);
+    console.log("Filtered by favorites: ", newFilteredBooks); // Add this line
+  }
 
-    if (filter === "wishlist") {
-      newFilteredBooks = newFilteredBooks.filter((book) =>
-        wishlist.includes(book.id)
-      );
-      console.log("Filtered by wishlist: ", newFilteredBooks); // Add this line
-    }
+  if (filter === "wishlist") {
+    newFilteredBooks = newFilteredBooks.filter((book) =>
+      wishlist.includes(book.title)
+    );
+    console.log("Filtered by wishlist: ", newFilteredBooks); // Add this line
+  }
 
-    setFilteredBooks(newFilteredBooks);
-  };
+  setFilteredBooks(newFilteredBooks);
+};
 
-  const toggleFavorite = (book) => {
-    if (favorites.some((favoriteBook) => favoriteBook.id === book.id)) {
-      setFavorites(
-        favorites.filter((favoriteBook) => favoriteBook.id !== book.id)
-      );
-      // Set favorite to false for this book in books.
-      setBooks((prevBooks) =>
-        prevBooks.map((b) => (b.id === book.id ? { ...b, favorite: false } : b))
-      );
-    } else {
-      console.log("Add to fav ok");
-      setFavorites((prevFavorites) => [...prevFavorites, book]);
-      // Set favorite to true for this book in books.
-      setBooks((prevBooks) =>
-        prevBooks.map((b) => (b.id === book.id ? { ...b, favorite: true } : b))
-      );
-    }
-  };
+const toggleFavorite = (book) => {
+  if (favorites.some((favoriteBook) => favoriteBook.title === book.title)) {
+    setFavorites(
+      favorites.filter((favoriteBook) => favoriteBook.title !== book.title)
+    );
+    setBooks((prevBooks) => ({
+      ...prevBooks,
+      [book.title]: { ...book, favorite: false },
+    }));
+  } else {
+    console.log("Add to fav ok");
+    setFavorites((prevFavorites) => [...prevFavorites, book]);
+    setBooks((prevBooks) => ({
+      ...prevBooks,
+      [book.title]: { ...book, favorite: true },
+    }));
+  }
+};
 
   const clearFavorites = () => {
     setFavorites([]);
@@ -66,21 +63,21 @@ const App = () => {
     }
   };
 
-  const fetchBooks = () => {
-    if (Array.isArray(booksData.books)) {
-      const flattenedBooks = booksData.books.flat();
-      setBooks(
-        flattenedBooks.map((book) => ({
-          ...book,
-          favorite: false,
-          wish: false,
-        }))
-      );
-    } else {
-      console.error("Fetched books data is not an array:", booksData);
-      setBooks([]);
-    }
-  };
+ const fetchBooks = () => {
+   if (Array.isArray(booksData.books)) {
+     const flattenedBooks = booksData.books.flat();
+     setBooks(
+       flattenedBooks.reduce((acc, book) => {
+         acc[book.title] = { ...book, favorite: false, wish: false };
+         return acc;
+       }, {})
+     );
+   } else {
+     console.error("Fetched books data is not an array:", booksData);
+     setBooks([]);
+   }
+ };
+
 
   useEffect(() => {
     fetchBooks();
