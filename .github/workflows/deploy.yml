@@ -20,17 +20,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm install
+      - name: Set up Node.js and Vite
+        run: |
+          npm install -g vite # Install Vite globally
+          npm install # Install other dependencies
 
       - name: Build with Vite
-        run: npx vite build
+        run: vite build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
