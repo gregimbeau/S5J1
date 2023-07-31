@@ -1,11 +1,12 @@
 @import "bookCard";
+@import "button";
+@import "colors";
 
 .book-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-
 .filter-buttons {
   display: flex;
   justify-content: space-between;

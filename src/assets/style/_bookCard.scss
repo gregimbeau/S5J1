@@ -1,3 +1,6 @@
+@import "button";
+@import "colors";
+
 .book-card {
   flex-basis: 18rem;
   flex-grow: 0;
@@ -8,7 +11,6 @@
   border-radius: 0.25rem;
   overflow: hidden;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-
 
   img {
     width: 100%;
@@ -28,20 +30,18 @@
     padding: 0 1rem 1rem;
     line-height: 1.5;
   }
+  .added-favorite {
+    background-color: $green;
+    color: white;
+  }
+
+  .added-wishlist {
+    background-color: $green;
+    color: white;
+  }
 
   button {
-    color: #fff;
-    background-color: #3182ce;
-    border-radius: 0.25rem;
-    margin: 0.5rem;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    cursor: pointer;
-    transition: all 0.2s;
-
-    &:hover {
-      background-color: #2b6cb0;
-    }
+    @extend %button-style;
   }
+
 }

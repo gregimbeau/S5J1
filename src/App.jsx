@@ -152,7 +152,7 @@ const App = () => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
     filterBooks();
-  }, [filter, favorites, wishlist]);
+  }, [filter, favorites, wishlist, searchTerm]);
 
   return (
     <div>
