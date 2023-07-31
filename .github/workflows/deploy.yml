@@ -31,11 +31,11 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16  # You can adjust the Node.js version here
+          node-version: 14  # You can adjust the Node.js version here
       - name: Install dependencies
         run: npm install  # Replace with yarn install if you use Yarn
       - name: Build
-        run: npm run build  # Replace with your build command (e.g., vite build)
+        run: vite build
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
