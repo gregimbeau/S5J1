@@ -12,17 +12,38 @@ const App = () => {
   const [filter, setFilter] = useState("");
   const [filteredBooks, setFilteredBooks] = useState([]);
 
+
+    const filterBySearchTerm = () => {
+      if (searchTerm !== "") {
+        setFilteredBooks(
+          Object.values(books).filter((book) =>
+            book.title.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        );
+      } else {
+        setFilteredBooks(Object.values(books));
+      }
+    };
+  
   const filterBooks = () => {
     let newFilteredBooks = Object.values(books);
 
+    if (searchTerm) {
+      newFilteredBooks = newFilteredBooks.filter((book) =>
+        book.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
     if (filter === "favorites") {
-      newFilteredBooks = newFilteredBooks.filter((book) => book.favorite);
-      console.log("Filtered by favorites: ", newFilteredBooks); // Add this line
+      newFilteredBooks = newFilteredBooks.filter((book) =>
+        favorites.some((favoriteBook) => favoriteBook.title === book.title)
+      );
     }
 
     if (filter === "wishlist") {
-      newFilteredBooks = newFilteredBooks.filter((book) => book.wishlist);
-      console.log("Filtered by wishlist: ", newFilteredBooks); // Add this line
+      newFilteredBooks = newFilteredBooks.filter((book) =>
+        wishlist.some((wishlistBook) => wishlistBook.title === book.title)
+      );
     }
 
     setFilteredBooks(newFilteredBooks);
@@ -47,16 +68,16 @@ const App = () => {
     }
   };
 
-const clearFavorites = () => {
-  setFavorites([]);
-  setBooks((prevBooks) => {
-    const updatedBooks = { ...prevBooks };
-    Object.keys(updatedBooks).forEach((bookTitle) => {
-      updatedBooks[bookTitle].favorite = false;
+  const clearFavorites = () => {
+    setFavorites([]);
+    setBooks((prevBooks) => {
+      const updatedBooks = { ...prevBooks };
+      Object.keys(updatedBooks).forEach((bookTitle) => {
+        updatedBooks[bookTitle].favorite = false;
+      });
+      return updatedBooks;
     });
-    return updatedBooks;
-  });
-};
+  };
 
   const toggleWishlist = (book) => {
     if (wishlist.some((wishlistBook) => wishlistBook.title === book.title)) {
@@ -77,16 +98,16 @@ const clearFavorites = () => {
     }
   };
 
-const clearWishlist = () => {
-  setWishlist([]);
-  setBooks((prevBooks) => {
-    const updatedBooks = { ...prevBooks };
-    Object.keys(updatedBooks).forEach((bookTitle) => {
-      updatedBooks[bookTitle].wishlist = false;
+  const clearWishlist = () => {
+    setWishlist([]);
+    setBooks((prevBooks) => {
+      const updatedBooks = { ...prevBooks };
+      Object.keys(updatedBooks).forEach((bookTitle) => {
+        updatedBooks[bookTitle].wishlist = false;
+      });
+      return updatedBooks;
     });
-    return updatedBooks;
-  });
-};
+  };
 
   const fetchBooks = () => {
     if (Array.isArray(booksData.books)) {
@@ -121,7 +142,8 @@ const clearWishlist = () => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
     filterBooks();
-  }, [filter, favorites, wishlist]);
+    filterBySearchTerm();
+  }, [filter, favorites, wishlist, searchTerm]);
 
   return (
     <div>
