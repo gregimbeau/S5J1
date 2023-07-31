@@ -9,22 +9,21 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [favorites, setFavorites] = useState([]);
   const [wishlist, setWishlist] = useState([]);
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
 
+  const filterBySearchTerm = () => {
+    if (searchTerm !== "") {
+      setFilteredBooks(
+        Object.values(books).filter((book) =>
+          book.title.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+    } else {
+      setFilteredBooks(Object.values(books));
+    }
+  };
 
-    const filterBySearchTerm = () => {
-      if (searchTerm !== "") {
-        setFilteredBooks(
-          Object.values(books).filter((book) =>
-            book.title.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-        );
-      } else {
-        setFilteredBooks(Object.values(books));
-      }
-    };
-  
   const filterBooks = () => {
     let newFilteredBooks = Object.values(books);
 
@@ -34,16 +33,27 @@ const App = () => {
       );
     }
 
-    if (filter === "favorites") {
-      newFilteredBooks = newFilteredBooks.filter((book) =>
+    let favoritesFiltered = [];
+    let wishlistFiltered = [];
+
+    if (filter.includes("favorites")) {
+      favoritesFiltered = newFilteredBooks.filter((book) =>
         favorites.some((favoriteBook) => favoriteBook.title === book.title)
       );
     }
 
-    if (filter === "wishlist") {
-      newFilteredBooks = newFilteredBooks.filter((book) =>
+    if (filter.includes("wishlist")) {
+      wishlistFiltered = newFilteredBooks.filter((book) =>
         wishlist.some((wishlistBook) => wishlistBook.title === book.title)
       );
+    }
+
+    if (filter.includes("favorites") && filter.includes("wishlist")) {
+      newFilteredBooks = [...favoritesFiltered, ...wishlistFiltered];
+    } else if (filter.includes("favorites")) {
+      newFilteredBooks = favoritesFiltered;
+    } else if (filter.includes("wishlist")) {
+      newFilteredBooks = wishlistFiltered;
     }
 
     setFilteredBooks(newFilteredBooks);
@@ -142,7 +152,6 @@ const App = () => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
     filterBooks();
-    
   }, [filter, favorites, wishlist]);
 
   return (
