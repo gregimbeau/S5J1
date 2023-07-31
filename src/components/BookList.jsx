@@ -19,13 +19,13 @@ const BookList = ({
           isFavorite={favorites.some(
             (favorite) => favorite.title === book.title
           )}
-          isWishlist={wishlist.includes(book.title)}
+          isWishlist={wishlist.some(
+            (wishlistItem) => wishlistItem.title === book.title
+          )}
         />
       ))}
     </div>
   );
 };
-
-
 
 export default BookList;
