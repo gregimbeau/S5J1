@@ -142,8 +142,8 @@ const App = () => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
     filterBooks();
-    filterBySearchTerm();
-  }, [filter, favorites, wishlist, searchTerm]);
+    
+  }, [filter, favorites, wishlist]);
 
   return (
     <div>
