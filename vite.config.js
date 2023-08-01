@@ -10,5 +10,4 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: "/S5J1/", // Set the base property to '/S5J1/'
 });
